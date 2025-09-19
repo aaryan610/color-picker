@@ -1,7 +1,6 @@
 import { useMemo } from "react";
-// lib
-import { cn } from "@/lib/common";
 // local imports
+import { cn } from "../lib/common";
 import type { PreDefinedColorsContainerClassNames, Value, ValueObject } from "../types";
 import { getValueObjectFromValue } from "../utils";
 

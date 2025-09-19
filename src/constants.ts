@@ -1,5 +1,5 @@
 // local imports
-import type { ColorScheme } from "../types";
+import type { ColorScheme } from "./types";
 
 export const COLOR_SCHEMES: {
   key: ColorScheme;

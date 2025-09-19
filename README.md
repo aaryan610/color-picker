@@ -1,70 +1,198 @@
-# Getting Started with Create React App
+# @aaryan610/color-picker
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, customizable React color picker component with full HSL/HSV support, opacity controls, and multiple color format outputs.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Multiple Color Formats**: Support for HEX, RGB/RGBA, and HSL/HSLA
+- **HSV Color Space**: Intuitive saturation and brightness selection
+- **Opacity Control**: Optional alpha channel support
+- **Predefined Colors**: Customizable color palette
+- **Responsive Design**: Works on desktop and mobile devices
+- **TypeScript**: Full type safety and IntelliSense support
+- **Tailwind CSS**: Styled with Tailwind for easy customization
+- **Zero Dependencies**: Only requires React and a few utility libraries
 
-### `npm start`
+## Installation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```bash
+npm install @aaryan610/color-picker
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```bash
+yarn add @aaryan610/color-picker
+```
 
-### `npm test`
+```bash
+pnpm add @aaryan610/color-picker
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Basic Usage
 
-### `npm run build`
+```tsx
+import { ColorPicker } from "@aaryan610/color-picker";
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+function App() {
+  const handleColorChange = (color) => {
+    console.log("Selected color:", color);
+  };
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+  return (
+    <div>
+      <ColorPicker value={{ hex: "#ff0000" }} onChange={handleColorChange} />
+    </div>
+  );
+}
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Advanced Usage
 
-### `npm run eject`
+```tsx
+import { ColorPicker } from "@aaryan610/color-picker";
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+function App() {
+  const [color, setColor] = useState({
+    hex: "#3b82f6",
+    rgb: { r: 59, g: 130, b: 246, a: 1 },
+    hsl: { h: 217, s: 91, l: 60, a: 1 },
+  });
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  const predefinedColors = [
+    { hex: "#ff0000", rgb: { r: 255, g: 0, b: 0 }, hsl: { h: 0, s: 100, l: 50 } },
+    { hex: "#00ff00", rgb: { r: 0, g: 255, b: 0 }, hsl: { h: 120, s: 100, l: 50 } },
+    { hex: "#0000ff", rgb: { r: 0, g: 0, b: 255 }, hsl: { h: 240, s: 100, l: 50 } },
+  ];
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+  return (
+    <ColorPicker
+      value={color}
+      onChange={setColor}
+      predefinedColors={predefinedColors}
+      hideOpacityPicker={false}
+      debounceTime={150}
+      onColorDisplayClick={(e) => {
+        console.log("Color copied to clipboard!");
+      }}
+      classNames={{
+        root: "custom-color-picker",
+        shadeContainer: {
+          root: "custom-shade-container",
+          pointer: "custom-pointer",
+        },
+      }}
+    />
+  );
+}
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## API Reference
 
-## Learn More
+### ColorPicker Props
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+| Prop                  | Type                           | Default              | Description                              |
+| --------------------- | ------------------------------ | -------------------- | ---------------------------------------- |
+| `value`               | `ValueObject`                  | `{ hex: '#000000' }` | Current color value                      |
+| `onChange`            | `(color: ValueObject) => void` | -                    | Callback fired when color changes        |
+| `predefinedColors`    | `ValueObject[]`                | `[]`                 | Array of predefined colors to display    |
+| `hideOpacityPicker`   | `boolean`                      | `false`              | Hide the opacity/alpha slider            |
+| `debounceTime`        | `number`                       | `100`                | Debounce time for onChange callback (ms) |
+| `onColorDisplayClick` | `(e: MouseEvent) => void`      | -                    | Callback when color display is clicked   |
+| `classNames`          | `ColorPickerClassNames`        | `{}`                 | Custom CSS classes for styling           |
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Value Object
 
-### Code Splitting
+```typescript
+type ValueObject {
+  hex: string; // '#ff0000'
+  rgb: {
+    // RGB values
+    r: number; // 0-255
+    g: number; // 0-255
+    b: number; // 0-255
+    a: number; // 0-1
+  };
+  hsl: {
+    // HSL values
+    h: number; // 0-360
+    s: number; // 0-100
+    l: number; // 0-100
+    a: number; // 0-1
+  };
+}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Custom Styling
 
-### Analyzing the Bundle Size
+The component accepts custom class names for full styling control:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```typescript
+type ColorPickerClassNames {
+  root?: string;
+  saturationContainer?: {
+    root?: string;
+    pointer?: string;
+    colorDisplay?: {
+      root?: string;
+      icon?: string;
+      text?: string;
+    };
+  };
+  colorContainer?: {
+    colorContainer?: string;
+    pointer?: string;
+  };
+  opacityContainer?: {
+    root?: string;
+    pointer?: string;
+  };
+  predefinedColorsContainer?: {
+    root?: string;
+    color?: string;
+  };
+  footer?: {
+    root?: string;
+    button?: string;
+  };
+}
+```
 
-### Making a Progressive Web App
+## Color Formats
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+The color picker supports multiple output formats that are automatically synchronized:
 
-### Advanced Configuration
+- **HEX**: `#ff0000` or `#ff0000ff` (with alpha)
+- **RGB**: `rgb(255, 0, 0)` or `rgba(255, 0, 0, 1)`
+- **HSL**: `hsl(0, 100%, 50%)` or `hsla(0, 100%, 50%, 1)`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Browser Support
 
-### Deployment
+- Chrome/Edge 88+
+- Firefox 84+
+- Safari 14+
+- React 16.8+ (hooks support required)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Styling
 
-### `npm run build` fails to minify
+This component uses Tailwind CSS classes. If you're not using Tailwind in your project, you'll need to either:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Include Tailwind CSS in your project
+2. Provide custom styles via the `classNames` prop
+3. Override the default styles with your own CSS
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Changelog
+
+### 0.1.0
+
+- Initial release
+- Multiple color format outputs
+- Opacity controls
+- Predefined colors
+- TypeScript support

@@ -1,9 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Files } from "lucide-react";
 import tinyColor from "tinycolor2";
-// lib
-import { cn } from "@/lib/common";
 // local imports
+import { cn } from "../lib/common";
 import type { ColorScheme, SaturationContainerClassNames, ValueHSL, ValueObject } from "../types";
 
 type Props = {

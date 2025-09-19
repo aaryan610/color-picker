@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-// lib
-import { cn } from "@/lib/common";
 // local imports
+import { cn } from "../lib/common";
 import type { OpacityContainerClassNames, ValueObject } from "../types";
 
 type Props = {

@@ -78,10 +78,6 @@ module.exports = {
             position: "after",
           },
           {
-            pattern: "@/**",
-            group: "internal",
-          },
-          {
             pattern: "public/**",
             group: "internal",
             position: "after",

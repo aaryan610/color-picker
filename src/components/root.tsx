@@ -1,12 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import { debounce } from "lodash-es";
 import type tinyColor from "tinycolor2";
-// lib
-import { cn } from "@/lib/common";
 // local imports
-import { DEFAULT_COLOR_VALUE } from "./constants";
+import { DEFAULT_COLOR_VALUE } from "../constants";
 import { ColorPickerFooter } from "./footer";
 import { ColorPickerHueContainer } from "./hue-container";
+import { cn } from "../lib/common";
 import { ColorPickerOpacityContainer } from "./opacity-container";
 import { ColorPickerPreDefinedColors } from "./pre-defined-colors";
 import { ColorPickerSaturationContainer } from "./saturation-container";
@@ -44,7 +43,6 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props) => {
       },
       !hideOpacityPicker
     );
-    console.log("valueObject", valueObject);
     debouncedOnChange(valueObject);
   }, [color, alpha, debouncedOnChange, hideOpacityPicker]);
 

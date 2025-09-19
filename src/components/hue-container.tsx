@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-// lib
-import { cn } from "@/lib/common";
 // local imports
+import { cn } from "../lib/common";
 import type { HueContainerClassNames, ValueHSL, ValueObject } from "../types";
 
 type Props = {

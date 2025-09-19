@@ -1,7 +1,6 @@
-// lib
-import { cn } from "@/lib/common";
 // local imports
-import { COLOR_SCHEMES } from "./constants";
+import { COLOR_SCHEMES } from "../constants";
+import { cn } from "../lib/common";
 import type { ColorScheme, FooterClassNames } from "../types";
 
 type Props = {
