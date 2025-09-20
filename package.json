@@ -1,5 +1,5 @@
 {
-  "name": "@aaryan610/color-picker",
+  "name": "react-neat-color-picker",
   "version": "0.1.0",
   "description": "A customizable React color picker component.",
   "main": "dist/index.mjs",
