@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Files } from "lucide-react";
 import tinyColor from "tinycolor2";
 // local imports
@@ -154,7 +154,7 @@ export const ColorPickerSaturationContainer: React.FC<Props> = (props) => {
   return (
     <div
       ref={shadeContainerRef}
-      className={cn("relative aspect-[3/2] w-full cursor-crosshair", classNames.root)}
+      className={cn("relative aspect-[3/2] w-full rounded-xl cursor-crosshair", classNames.root)}
       style={{
         background: `linear-gradient(transparent, black), linear-gradient(to right, white, transparent), hsl(${value.hsl.h}, 100%, 50%)`,
       }}
@@ -175,7 +175,7 @@ export const ColorPickerSaturationContainer: React.FC<Props> = (props) => {
         ref={colorDisplayRef}
         type="button"
         className={cn(
-          "absolute bottom-2 left-2 flex items-center gap-1 p-1 text-sm font-medium whitespace-nowrap select-none cursor-pointer",
+          "absolute bottom-2 left-2 flex items-center gap-1 p-1 text-sm text-white font-medium whitespace-nowrap select-none cursor-pointer",
           classNames.colorDisplay?.root
         )}
         onClick={handleColorDisplayClick}

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 // local imports
 import { cn } from "../lib/common";
 import type { HueContainerClassNames, ValueHSL, ValueObject } from "../types";

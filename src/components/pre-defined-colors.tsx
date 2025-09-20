@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import React, { useMemo } from "react";
 // local imports
 import { cn } from "../lib/common";
 import type { PreDefinedColorsContainerClassNames, Value, ValueObject } from "../types";
@@ -18,7 +18,7 @@ export const ColorPickerPreDefinedColors: React.FC<Props> = (props) => {
   if (colorsSet.size === 0) return null;
 
   return (
-    <div className={cn("flex items-center gap-4", classNames.root)}>
+    <div className={cn("flex items-center flex-wrap gap-4", classNames.root)}>
       {Array.from(colorsSet).map((color, index) => {
         const valueObject = getValueObjectFromValue(color, true);
 

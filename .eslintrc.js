@@ -2,7 +2,11 @@ import { resolve } from "node:path";
 const project = resolve(process.cwd(), "tsconfig.json");
 
 module.exports = {
-  extends: ["prettier", "plugin:@typescript-eslint/recommended"],
+  extends: [
+    "prettier",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:storybook/recommended"
+  ],
   parser: "@typescript-eslint/parser",
   plugins: ["react", "@typescript-eslint", "import"],
   globals: {

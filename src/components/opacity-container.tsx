@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 // local imports
 import { cn } from "../lib/common";
 import type { OpacityContainerClassNames, ValueObject } from "../types";

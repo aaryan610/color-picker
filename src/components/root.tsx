@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { debounce } from "lodash-es";
 import type tinyColor from "tinycolor2";
 // local imports
@@ -71,7 +71,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props) => {
   );
 
   return (
-    <div className={cn("w-72 space-y-6", classNames.root)}>
+    <div className={cn("w-80 bg-zinc-800 p-4 rounded-2xl border border-black space-y-6", classNames.root)}>
       <ColorPickerSaturationContainer
         alpha={alpha}
         classNames={classNames.saturationContainer ?? {}}
