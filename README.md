@@ -1,36 +1,36 @@
-# @aaryan610/color-picker
+# react-neat-color-picker
 
 A modern, customizable React color picker component with full HSL/HSV support, opacity controls, and multiple color format outputs.
 
 ## Features
 
-- **Multiple Color Formats**: Support for HEX, RGB/RGBA, and HSL/HSLA
-- **HSV Color Space**: Intuitive saturation and brightness selection
-- **Opacity Control**: Optional alpha channel support
-- **Predefined Colors**: Customizable color palette
-- **Responsive Design**: Works on desktop and mobile devices
+- **Multiple color formats**: Support for HEX, RGB/RGBA, and HSL/HSLA
+- **HSV color space**: Intuitive saturation and brightness selection
+- **Opacity control**: Optional alpha channel support
+- **Predefined colors**: Customizable color palette for quick access to some predefined colors
+- **Accessible**: Works on desktop and mobile devices
 - **TypeScript**: Full type safety and IntelliSense support
 - **Tailwind CSS**: Styled with Tailwind for easy customization
-- **Zero Dependencies**: Only requires React and a few utility libraries
+- **Zero dependencies**: Only requires React and a few utility libraries
 
 ## Installation
 
 ```bash
-npm install @aaryan610/color-picker
+npm install react-neat-color-picker
 ```
 
 ```bash
-yarn add @aaryan610/color-picker
+yarn add react-neat-color-picker
 ```
 
 ```bash
-pnpm add @aaryan610/color-picker
+pnpm add react-neat-color-picker
 ```
 
-## Basic Usage
+## Basic usage
 
 ```tsx
-import { ColorPicker } from "@aaryan610/color-picker";
+import { ColorPicker } from "react-neat-color-picker";
 
 function App() {
   const handleColorChange = (color) => {
@@ -39,44 +39,34 @@ function App() {
 
   return (
     <div>
-      <ColorPicker value={{ hex: "#ff0000" }} onChange={handleColorChange} />
+      <ColorPicker value="#ff0000" onChange={handleColorChange} />
     </div>
   );
 }
 ```
 
-## Advanced Usage
+## Advanced usage
 
 ```tsx
-import { ColorPicker } from "@aaryan610/color-picker";
+import { ColorPicker } from "react-neat-color-picker";
 
 function App() {
-  const [color, setColor] = useState({
-    hex: "#3b82f6",
-    rgb: { r: 59, g: 130, b: 246, a: 1 },
-    hsl: { h: 217, s: 91, l: 60, a: 1 },
-  });
+  const [color, setColor] = useState("#3b82f6");
 
-  const predefinedColors = [
-    { hex: "#ff0000", rgb: { r: 255, g: 0, b: 0 }, hsl: { h: 0, s: 100, l: 50 } },
-    { hex: "#00ff00", rgb: { r: 0, g: 255, b: 0 }, hsl: { h: 120, s: 100, l: 50 } },
-    { hex: "#0000ff", rgb: { r: 0, g: 0, b: 255 }, hsl: { h: 240, s: 100, l: 50 } },
-  ];
+  const predefinedColors = [{ hex: "#ff0000" }, { rgb: { r: 0, g: 255, b: 0 } }, { hsl: { h: 240, s: 100, l: 50 } }];
 
   return (
     <ColorPicker
       value={color}
-      onChange={setColor}
+      onChange={(val) => setColor(val.hex)}
       predefinedColors={predefinedColors}
       hideOpacityPicker={false}
       debounceTime={150}
-      onColorDisplayClick={(e) => {
-        console.log("Color copied to clipboard!");
-      }}
+      onColorDisplayClick={() => alert("Color copied to clipboard!")}
       classNames={{
         root: "custom-color-picker",
-        shadeContainer: {
-          root: "custom-shade-container",
+        saturationContainer: {
+          root: "custom-saturation-container",
           pointer: "custom-pointer",
         },
       }}
@@ -85,48 +75,56 @@ function App() {
 }
 ```
 
-## API Reference
+## API reference
 
-### ColorPicker Props
+### ColorPicker props
 
-| Prop                  | Type                           | Default              | Description                              |
-| --------------------- | ------------------------------ | -------------------- | ---------------------------------------- |
-| `value`               | `ValueObject`                  | `{ hex: '#000000' }` | Current color value                      |
-| `onChange`            | `(color: ValueObject) => void` | -                    | Callback fired when color changes        |
-| `predefinedColors`    | `ValueObject[]`                | `[]`                 | Array of predefined colors to display    |
-| `hideOpacityPicker`   | `boolean`                      | `false`              | Hide the opacity/alpha slider            |
-| `debounceTime`        | `number`                       | `100`                | Debounce time for onChange callback (ms) |
-| `onColorDisplayClick` | `(e: MouseEvent) => void`      | -                    | Callback when color display is clicked   |
-| `classNames`          | `ColorPickerClassNames`        | `{}`                 | Custom CSS classes for styling           |
+| Prop                  | Type                           | Default     | Description                              |
+| --------------------- | ------------------------------ | ----------- | ---------------------------------------- |
+| `value`               | `Value`                        | `'#000000'` | Current color value                      |
+| `onChange`            | `(color: ValueObject) => void` | -           | Callback fired when color changes        |
+| `predefinedColors`    | `Value[]`                      | `[]`        | Array of predefined colors to display    |
+| `hideOpacityPicker`   | `boolean`                      | `false`     | Hide the opacity/alpha slider            |
+| `debounceTime`        | `number`                       | `100`       | Debounce time for onChange callback (ms) |
+| `onColorDisplayClick` | `(e: MouseEvent) => void`      | -           | Callback when color display is clicked   |
+| `classNames`          | `ColorPickerClassNames`        | `{}`        | Custom CSS classes for styling           |
 
-### Value Object
+### Types
 
 ```typescript
-type ValueObject {
-  hex: string; // '#ff0000'
-  rgb: {
-    // RGB values
-    r: number; // 0-255
-    g: number; // 0-255
-    b: number; // 0-255
-    a: number; // 0-1
-  };
-  hsl: {
-    // HSL values
-    h: number; // 0-360
-    s: number; // 0-100
-    l: number; // 0-100
-    a: number; // 0-1
-  };
-}
+// The initial value to load the color picker with
+type Value = string | ValueRGB | ValueHSL;
+
+// The argument type for the onChange callback
+type ValueObject = {
+  hex: string;
+  rgb: ValueRGB;
+  hsl: ValueHSL;
+};
+
+type ValueRGB = {
+  r: number;
+  g: number;
+  b: number;
+  // The alpha value of the color from 0 to 1
+  a?: number;
+};
+
+type ValueHSL = {
+  h: number;
+  s: number;
+  l: number;
+  // The alpha value of the color from 0 to 1
+  a?: number;
+};
 ```
 
-### Custom Styling
+### Custom styling
 
 The component accepts custom class names for full styling control:
 
 ```typescript
-type ColorPickerClassNames {
+type ColorPickerClassNames = {
   root?: string;
   saturationContainer?: {
     root?: string;
@@ -137,8 +135,8 @@ type ColorPickerClassNames {
       text?: string;
     };
   };
-  colorContainer?: {
-    colorContainer?: string;
+  hueContainer?: {
+    root?: string;
     pointer?: string;
   };
   opacityContainer?: {
@@ -147,16 +145,21 @@ type ColorPickerClassNames {
   };
   predefinedColorsContainer?: {
     root?: string;
-    color?: string;
+    item?: string;
   };
   footer?: {
     root?: string;
-    button?: string;
+    colorSchemePicker?: {
+      root?: string;
+      item?: string;
+      activeItem?: string;
+      separator?: string;
+    };
   };
-}
+};
 ```
 
-## Color Formats
+## Color formats
 
 The color picker supports multiple output formats that are automatically synchronized:
 
@@ -164,7 +167,7 @@ The color picker supports multiple output formats that are automatically synchro
 - **RGB**: `rgb(255, 0, 0)` or `rgba(255, 0, 0, 1)`
 - **HSL**: `hsl(0, 100%, 50%)` or `hsla(0, 100%, 50%, 1)`
 
-## Browser Support
+## Browser support
 
 - Chrome/Edge 88+
 - Firefox 84+

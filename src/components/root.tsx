@@ -81,11 +81,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props) => {
         selectedDisplayScheme={selectedDisplayScheme}
         value={color}
       />
-      <ColorPickerHueContainer
-        classNames={classNames.colorContainer ?? {}}
-        onChange={handleColorChange}
-        value={color}
-      />
+      <ColorPickerHueContainer classNames={classNames.hueContainer ?? {}} onChange={handleColorChange} value={color} />
       {!hideOpacityPicker && (
         <ColorPickerOpacityContainer
           classNames={classNames.opacityContainer ?? {}}

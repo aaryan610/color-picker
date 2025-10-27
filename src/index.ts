@@ -1,5 +1,6 @@
-import { ColorPicker } from "./components/root";
+import "./globals.css";
 
+import { ColorPicker } from "./components/root";
 export { ColorPicker } from "./components/root";
 
 // types

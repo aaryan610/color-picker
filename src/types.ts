@@ -2,7 +2,7 @@ export type ColorPickerProps = {
   classNames?: {
     root?: string;
     saturationContainer?: SaturationContainerClassNames;
-    colorContainer?: HueContainerClassNames;
+    hueContainer?: HueContainerClassNames;
     opacityContainer?: OpacityContainerClassNames;
     predefinedColorsContainer?: PreDefinedColorsContainerClassNames;
     footer?: FooterClassNames;
